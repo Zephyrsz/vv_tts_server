@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOICEVOX 本地 TTS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #f2f5f5;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #dce4e4;
+            overflow: hidden;
+        }
+
+        .header {
+            background: white;
+            color: #172528;
+            padding: 24px 30px;
+            border-bottom: 1px solid #dce4e4;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 0;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #007c83;
+            box-shadow: 0 0 0 3px rgba(0, 124, 131, 0.12);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            min-width: 150px;
+            background: #007c83;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        button:hover:not(:disabled) {
+            background: #006b70;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 124, 131, 0.16);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        button.secondary {
+            background: #6c757d;
+        }
+
+        button.secondary:hover:not(:disabled) {
+            background: #5a6268;
+        }
+
+        .status {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status.connected {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status.connected::before {
+            background: #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
+        }
+
+        .status.disconnected {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status.disconnected::before {
+            background: #dc3545;
+        }
+
+        .status.processing {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .status.processing::before {
+            background: #17a2b8;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .log {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .log-entry {
+            margin-bottom: 4px;
+            word-wrap: break-word;
+        }
+
+        .log-entry.info {
+            color: #0c5460;
+        }
+
+        .log-entry.success {
+            color: #155724;
+        }
+
+        .log-entry.error {
+            color: #721c24;
+        }
+
+        .param-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .param-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .param-item input[type="range"] {
+            padding: 0;
+        }
+
+        .param-value {
+            display: inline-block;
+            margin-left: 8px;
+            font-weight: 600;
+            color: #007c83;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            text-align: center;
+            font-size: 13px;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer a {
+            color: #007c83;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>VOICEVOX 四音色 TTS</h1>
+        </div>
+
+        <div class="content">
+            <!-- 连接设置 -->
+            <div class="section">
+                <div class="section-title">连接设置</div>
+                <div class="input-group">
+                    <label for="wsUrl">WebSocket 地址</label>
+                    <input type="text" id="wsUrl" value="" autocomplete="off">
+                </div>
+                <div class="button-group">
+                    <button id="connectBtn" onclick="connect()">连接</button>
+                    <button id="disconnectBtn" class="secondary" onclick="disconnect()" disabled>断开</button>
+                </div>
+                <div id="status" class="status disconnected">未连接</div>
+            </div>
+
+            <!-- 合成设置 -->
+            <div class="section">
+                <div class="section-title">语音合成</div>
+                <div class="input-group">
+                    <label for="text">文本 (日语)</label>
+                    <textarea id="text" placeholder="こんにちは">こんにちは、VOICEVOXです。</textarea>
+                </div>
+
+                <div class="input-group">
+                    <label for="speaker">说话人 ID</label>
+                    <select id="speaker" disabled></select>
+                </div>
+
+                <div class="section-title" style="margin-top: 25px;">音频参数</div>
+                <div class="param-grid">
+                    <div class="param-item">
+                        <label>语速 <span class="param-value" id="speedValue">1.0</span></label>
+                        <input type="range" id="speedScale" min="0.5" max="2.0" step="0.1" value="1.0" oninput="updateParamDisplay('speed', this.value)">
+                    </div>
+                    <div class="param-item">
+                        <label>音调 <span class="param-value" id="pitchValue">0.0</span></label>
+                        <input type="range" id="pitchScale" min="-0.5" max="0.5" step="0.1" value="0.0" oninput="updateParamDisplay('pitch', this.value)">
+                    </div>
+                    <div class="param-item">
+                        <label>抑扬 <span class="param-value" id="intonationValue">1.0</span></label>
+                        <input type="range" id="intonationScale" min="0" max="2.0" step="0.1" value="1.0" oninput="updateParamDisplay('intonation', this.value)">
+                    </div>
+                    <div class="param-item">
+                        <label>音量 <span class="param-value" id="volumeValue">1.0</span></label>
+                        <input type="range" id="volumeScale" min="0" max="2.0" step="0.1" value="1.0" oninput="updateParamDisplay('volume', this.value)">
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-top: 20px;">
+                    <label for="segmentLength">分段长度 (秒) <span class="param-value" id="segmentValue">0.3</span></label>
+                    <input type="range" id="segmentLength" min="0.1" max="1.0" step="0.1" value="0.3" oninput="updateParamDisplay('segment', this.value)">
+                </div>
+
+                <div class="button-group" style="margin-top: 20px;">
+                    <button id="streamSynthesizeBtn" onclick="streamSynthesize()" disabled>分段播放</button>
+                    <button id="synthesizeBtn" onclick="synthesize()" disabled>完整合成</button>
+                    <button id="getSpeakersBtn" onclick="getSpeakers()" disabled>刷新说话人</button>
+                </div>
+            </div>
+
+            <!-- 日志 -->
+            <div class="section">
+                <div class="section-title">运行日志</div>
+                <div class="log" id="log"></div>
+            </div>
+        </div>
+
+        <div class="footer">
+            基于 <a href="https://voicevox.hiroshiba.jp/" target="_blank" rel="noopener noreferrer">VOICEVOX</a>
+        </div>
+    </div>
+
+    <audio id="audioPlayer" style="display: none;"></audio>
+
+    <script>
+        let ws = null;
+        let audioContext = null;
+        let currentRequestId = null;
+        let incomingStreamRequestId = null;
+        let streamPlayback = null;
+        let audioObjectUrl = null;
+
+        function ensureAudioContext() {
+            if (!audioContext || audioContext.state === 'closed') {
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                try {
+                    audioContext = new AudioContextClass({ sampleRate: 24000 });
+                } catch {
+                    audioContext = new AudioContextClass();
+                }
+            }
+            return audioContext;
+        }
+
+        function stopPlayback() {
+            if (streamPlayback) {
+                for (const source of streamPlayback.sources) {
+                    source.onended = null;
+                    source.stop();
+                    source.disconnect();
+                }
+                streamPlayback = null;
+            }
+            const player = document.getElementById('audioPlayer');
+            player.pause();
+            player.removeAttribute('src');
+            player.load();
+            if (audioObjectUrl) {
+                URL.revokeObjectURL(audioObjectUrl);
+                audioObjectUrl = null;
+            }
+        }
+
+        function beginRequest() {
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                addLog('请先连接服务器，再进行合成', 'error');
+                return null;
+            }
+            stopPlayback();
+            currentRequestId = generateUUID();
+            return currentRequestId;
+        }
+
+        function updateParamDisplay(type, value) {
+            const displays = {
+                speed: 'speedValue',
+                pitch: 'pitchValue',
+                intonation: 'intonationValue',
+                volume: 'volumeValue',
+                segment: 'segmentValue'
+            };
+            document.getElementById(displays[type]).textContent = parseFloat(value).toFixed(1);
+        }
+
+        function addLog(message, type = 'info') {
+            const log = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = `[${time}] ${message}`;
+            log.appendChild(entry);
+            log.scrollTop = log.scrollHeight;
+        }
+
+        function updateStatus(state, message) {
+            const status = document.getElementById('status');
+            status.className = `status ${state}`;
+            status.textContent = message;
+        }
+
+        function connect() {
+            const url = document.getElementById('wsUrl').value;
+            addLog(`正在连接到 ${url}...`);
+
+            try {
+                ws = new WebSocket(url);
+                ws.binaryType = 'arraybuffer';
+                const socket = ws;
+
+                ws.onopen = () => {
+                    if (socket !== ws) return;
+                    addLog('✓ 连接成功', 'success');
+                    updateStatus('connected', '已连接');
+                    document.getElementById('connectBtn').disabled = true;
+                    document.getElementById('disconnectBtn').disabled = false;
+                    document.getElementById('getSpeakersBtn').disabled = false;
+                    getSpeakers();
+
+                };
+
+                ws.onmessage = (event) => {
+                    if (socket !== ws) return;
+                    if (typeof event.data === 'string') {
+                        // 控制消息
+                        const msg = JSON.parse(event.data);
+                        handleControlMessage(msg);
+                    } else {
+                        // 音频数据 (二进制)
+                        handleAudioChunk(event.data);
+                    }
+                };
+
+                ws.onerror = (error) => {
+                    if (socket !== ws) return;
+                    addLog('✗ 连接错误', 'error');
+                    updateStatus('disconnected', '连接失败');
+                };
+
+                ws.onclose = () => {
+                    if (socket !== ws) return;
+                    stopPlayback();
+                    currentRequestId = null;
+                    incomingStreamRequestId = null;
+                    addLog('✗ 连接已关闭', 'error');
+                    updateStatus('disconnected', '未连接');
+                    document.getElementById('connectBtn').disabled = false;
+                    document.getElementById('disconnectBtn').disabled = true;
+                    document.getElementById('streamSynthesizeBtn').disabled = true;
+                    document.getElementById('synthesizeBtn').disabled = true;
+                    document.getElementById('getSpeakersBtn').disabled = true;
+                    document.getElementById('speaker').disabled = true;
+                };
+            } catch (error) {
+                addLog(`✗ 连接失败: ${error.message}`, 'error');
+            }
+        }
+
+        function disconnect() {
+            if (ws) {
+                stopPlayback();
+                currentRequestId = null;
+                incomingStreamRequestId = null;
+                ws.close();
+            }
+        }
+
+        async function streamSynthesize() {
+            const text = document.getElementById('text').value;
+            const speaker = parseInt(document.getElementById('speaker').value, 10);
+
+            if (!text) {
+                alert('请输入文本');
+                return;
+            }
+
+            const requestId = beginRequest();
+            if (!requestId) return;
+            addLog(`发送分段播放请求: "${text.substring(0, 30)}..."`, 'info');
+            updateStatus('processing', '正在合成...');
+            try {
+                await ensureAudioContext().resume();
+            } catch (error) {
+                if (requestId === currentRequestId) {
+                    addLog(`无法启动音频播放，请再次点击分段播放：${error.message}`, 'error');
+                    updateStatus('connected', '已连接');
+                }
+                return;
+            }
+            if (requestId !== currentRequestId || !ws || ws.readyState !== WebSocket.OPEN) return;
+
+            ws.send(JSON.stringify({
+                type: 'stream_synthesize',
+                request_id: requestId,
+                text: text,
+                speaker: speaker,
+                params: {
+                    speedScale: parseFloat(document.getElementById('speedScale').value),
+                    pitchScale: parseFloat(document.getElementById('pitchScale').value),
+                    intonationScale: parseFloat(document.getElementById('intonationScale').value),
+                    volumeScale: parseFloat(document.getElementById('volumeScale').value),
+                    segmentLength: parseFloat(document.getElementById('segmentLength').value)
+                }
+            }));
+        }
+
+        function synthesize() {
+            const text = document.getElementById('text').value;
+            const speaker = parseInt(document.getElementById('speaker').value, 10);
+
+            if (!text) {
+                alert('请输入文本');
+                return;
+            }
+
+            const requestId = beginRequest();
+            if (!requestId) return;
+            addLog(`发送完整合成请求: "${text.substring(0, 30)}..."`, 'info');
+            updateStatus('processing', '正在合成...');
+
+            ws.send(JSON.stringify({
+                type: 'synthesize',
+                request_id: requestId,
+                text: text,
+                speaker: speaker,
+                params: {
+                    speedScale: parseFloat(document.getElementById('speedScale').value),
+                    pitchScale: parseFloat(document.getElementById('pitchScale').value),
+                    intonationScale: parseFloat(document.getElementById('intonationScale').value),
+                    volumeScale: parseFloat(document.getElementById('volumeScale').value)
+                }
+            }));
+        }
+
+        function getSpeakers() {
+            addLog('请求说话人列表...', 'info');
+            ws.send(JSON.stringify({
+                type: 'get_speakers'
+            }));
+        }
+
+        function handleControlMessage(msg) {
+            switch (msg.type) {
+                case 'stream_start':
+                    // Binary frames have no request ID. Associate them with the
+                    // most recent stream_start, including superseded streams.
+                    incomingStreamRequestId = msg.request_id;
+                    if (msg.request_id !== currentRequestId) break;
+                    stopPlayback();
+                    streamPlayback = {
+                        requestId: msg.request_id,
+                        sampleRate: msg.sampleRate,
+                        channels: null,
+                        frames: 0,
+                        startTime: null,
+                        sources: new Set(),
+                        parts: [],
+                        buffered: ensureAudioContext().sampleRate !== msg.sampleRate,
+                        ended: false,
+                    };
+                    addLog(`✓ 开始分段传输 (采样率: ${msg.sampleRate}Hz)`, 'success');
+                    if (streamPlayback.buffered) {
+                        addLog('正在缓冲音频，将连续播放以避免片段接缝', 'info');
+                    }
+                    break;
+
+                case 'stream_end':
+                    if (incomingStreamRequestId === msg.request_id) incomingStreamRequestId = null;
+                    if (msg.request_id !== currentRequestId || !streamPlayback || streamPlayback.ended) break;
+                    streamPlayback.ended = true;
+                    addLog(`✓ 分段传输完成 (${msg.total_chunks} 块, ${msg.total_bytes} bytes, ${msg.duration_ms}ms)`, 'success');
+                    if (streamPlayback.buffered && streamPlayback.frames > 0) {
+                        const stream = streamPlayback;
+                        const buffer = audioContext.createBuffer(stream.channels, stream.frames, stream.sampleRate);
+                        let offset = 0;
+                        for (const part of stream.parts) {
+                            for (let channel = 0; channel < stream.channels; channel++) {
+                                buffer.getChannelData(channel).set(part.channels[channel], offset);
+                            }
+                            offset += part.frames;
+                        }
+                        stream.parts = [];
+                        scheduleAudioBuffer(buffer, stream, 0);
+                    }
+                    finishStreamPlayback(streamPlayback);
+                    break;
+
+                case 'audio':
+                    if (msg.request_id !== currentRequestId) break;
+                    addLog('✓ 收到音频数据 (Base64)', 'success');
+                    updateStatus('connected', '已连接');
+                    playAudioBase64(msg.data);
+                    break;
+
+                case 'speakers':
+                    const selector = document.getElementById('speaker');
+                    const selected = selector.value || '0';
+                    const options = msg.data.flatMap(speaker => speaker.styles.map(style => ({
+                        id: style.id,
+                        label: `${speaker.name} · ${style.name} (${style.id})`
+                    }))).sort((a, b) => a.id - b.id);
+                    selector.replaceChildren(...options.map(item => new Option(item.label, item.id)));
+                    selector.value = options.some(item => String(item.id) === selected) ? selected : String(options[0]?.id ?? '');
+                    selector.disabled = options.length === 0;
+                    document.getElementById('streamSynthesizeBtn').disabled = options.length === 0;
+                    document.getElementById('synthesizeBtn').disabled = options.length === 0;
+                    addLog(`✓ 收到 ${msg.data.length} 个说话人`, 'success');
+                    break;
+
+                case 'error':
+                    if (msg.request_id && msg.request_id !== currentRequestId) break;
+                    stopPlayback();
+                    addLog(`✗ 错误: ${msg.message}`, 'error');
+                    updateStatus('connected', '已连接');
+                    break;
+
+                case 'pong':
+                    addLog('✓ Pong', 'success');
+                    break;
+
+                default:
+                    addLog(`未知消息类型: ${msg.type}`, 'info');
+            }
+        }
+
+        function parsePcmWav(arrayBuffer) {
+            const view = new DataView(arrayBuffer);
+            const tag = offset => String.fromCharCode(...new Uint8Array(arrayBuffer, offset, 4));
+            if (view.byteLength < 12 || tag(0) !== 'RIFF' || tag(8) !== 'WAVE') {
+                throw new Error('收到的音频不是 WAV');
+            }
+            const end = view.getUint32(4, true) + 8;
+            if (end > view.byteLength) throw new Error('WAV 文件不完整');
+            let format = null;
+            let data = null;
+            for (let offset = 12; offset + 8 <= end;) {
+                const name = tag(offset);
+                const size = view.getUint32(offset + 4, true);
+                const start = offset + 8;
+                if (start + size > end) throw new Error('WAV 数据不完整');
+                if (name === 'fmt ') {
+                    if (size < 16) throw new Error('WAV 格式信息不完整');
+                    format = {
+                        encoding: view.getUint16(start, true),
+                        channels: view.getUint16(start + 2, true),
+                        rate: view.getUint32(start + 4, true),
+                        blockAlign: view.getUint16(start + 12, true),
+                        bits: view.getUint16(start + 14, true),
+                    };
+                } else if (name === 'data') {
+                    data = { start, size };
+                }
+                offset = start + size + (size % 2);
+            }
+            if (!format || !data || format.encoding !== 1 || format.bits !== 16 ||
+                format.channels < 1 || format.channels > 2 || format.rate < 8000 ||
+                format.rate > 192000 || format.blockAlign !== format.channels * 2 ||
+                data.size % format.blockAlign !== 0) {
+                throw new Error('仅支持完整的 16 位 PCM WAV 音频');
+            }
+            const frames = data.size / format.blockAlign;
+            const channels = Array.from({ length: format.channels }, () => new Float32Array(frames));
+            for (let frame = 0; frame < frames; frame++) {
+                for (let channel = 0; channel < format.channels; channel++) {
+                    channels[channel][frame] = view.getInt16(data.start + frame * format.blockAlign + channel * 2, true) / 32768;
+                }
+            }
+            return { channels, frames, sampleRate: format.rate };
+        }
+
+        function handleAudioChunk(arrayBuffer) {
+            const stream = streamPlayback;
+            if (!stream || stream.ended || incomingStreamRequestId !== currentRequestId ||
+                stream.requestId !== currentRequestId) return;
+            try {
+                // Synchronous PCM parsing preserves wire order and avoids
+                // resetting the browser resampler at every WAV boundary.
+                const part = parsePcmWav(arrayBuffer);
+                if (part.sampleRate !== stream.sampleRate ||
+                    (stream.channels !== null && stream.channels !== part.channels.length)) {
+                    throw new Error('音频片段格式不一致');
+                }
+                stream.channels = part.channels.length;
+                if (part.frames === 0) return;
+                if (stream.buffered) {
+                    stream.parts.push(part);
+                } else {
+                    const buffer = audioContext.createBuffer(stream.channels, part.frames, part.sampleRate);
+                    part.channels.forEach((samples, channel) => buffer.copyToChannel(samples, channel));
+                    scheduleAudioBuffer(buffer, stream, stream.frames);
+                }
+                stream.frames += part.frames;
+            } catch (error) {
+                stopPlayback();
+                addLog(`✗ 音频播放失败: ${error.message}，请重试或使用完整合成`, 'error');
+                updateStatus('connected', '已连接');
+            }
+        }
+
+        function scheduleAudioBuffer(buffer, stream, frameOffset) {
+            if (stream.startTime === null) stream.startTime = audioContext.currentTime + 0.15;
+            let when = stream.startTime + frameOffset / stream.sampleRate;
+            if (when < audioContext.currentTime) {
+                // A real network/main-thread stall cannot be hidden by a
+                // sample clock. Rebuffer instead of overlapping late nodes.
+                stream.startTime = audioContext.currentTime + 0.15 - frameOffset / stream.sampleRate;
+                when = stream.startTime + frameOffset / stream.sampleRate;
+                addLog('音频缓冲不足，正在恢复播放', 'info');
+            }
+            const source = audioContext.createBufferSource();
+            source.buffer = buffer;
+            source.connect(audioContext.destination);
+            stream.sources.add(source);
+            source.onended = () => {
+                stream.sources.delete(source);
+                source.disconnect();
+                finishStreamPlayback(stream);
+            };
+            source.start(when);
+            updateStatus('processing', '正在播放...');
+        }
+
+        function finishStreamPlayback(stream) {
+            if (stream === streamPlayback && stream.ended && stream.sources.size === 0) {
+                streamPlayback = null;
+                updateStatus('connected', '已连接');
+                addLog('♪ 播放完成', 'success');
+            }
+        }
+
+        function playAudioBase64(base64Data) {
+            // 将 Base64 转换为 Blob
+            const binaryData = atob(base64Data);
+            const bytes = new Uint8Array(binaryData.length);
+            for (let i = 0; i < binaryData.length; i++) {
+                bytes[i] = binaryData.charCodeAt(i);
+            }
+            const blob = new Blob([bytes], { type: 'audio/wav' });
+            audioObjectUrl = URL.createObjectURL(blob);
+
+            const audioPlayer = document.getElementById('audioPlayer');
+            const requestId = currentRequestId;
+            audioPlayer.src = audioObjectUrl;
+            audioPlayer.play().catch(error => {
+                if (requestId === currentRequestId) addLog(`无法播放音频，请重新合成：${error.message}`, 'error');
+            });
+            addLog('♪ 正在播放音频', 'success');
+        }
+
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        // 页面加载时自动连接
+        window.addEventListener('load', () => {
+            document.getElementById('wsUrl').value = `wss://${window.location.host || '127.0.0.1:8767'}/ws`;
+            addLog('页面加载完成,准备就绪', 'success');
+        });
+    </script>
+</body>
+</html>

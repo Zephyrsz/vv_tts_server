@@ -1,0 +1,67 @@
+{
+  "selection_file": "voice_selection.yaml",
+  "models": [
+    {
+      "file": "0.vvm",
+      "model_uuid": "b0d3f0d1-d1ee-52b5-8fd9-2be7d9ea233f",
+      "source_sha256": "917e592cae92a02fb7668bd9e168df4e39c8ab2f5302c2be71906c70ec4e2df2",
+      "output_sha256": "0438d777e2021697f8cf5723bb6687e595b83f1b712261b6b8b6a281db3f013c",
+      "size_bytes": 58213262,
+      "voices": [
+        {
+          "name": "四国めたん",
+          "style": "あまあま",
+          "style_id": 0
+        },
+        {
+          "name": "春日部つむぎ",
+          "style": "ノーマル",
+          "style_id": 8
+        }
+      ],
+      "unchanged_weight_sha256": {
+        "models/pd.bin": "82256dcd9d8039c44a83a78c8ccb37755f334db0534b270fc81938c2fa2788dc",
+        "models/pi.bin": "263059b586ed4f70e141629646db5782c9e6383ffd7abae0db02391425bf7c6d",
+        "models/d.bin": "4148bf3ba3b375fc8d9e37b13fa09ca696d190961a8c6c894cb433d65cf4e5b6"
+      }
+    },
+    {
+      "file": "1.vvm",
+      "model_uuid": "430018b9-b600-5eca-8e2a-f97e699a845c",
+      "source_sha256": "8df20815be9a84a4b4723b9e778d2ef6a4df277e4872fe9efe29676a60e02774",
+      "output_sha256": "886ca9093ba0ba6c960973416ad7d4f56e47ad80193c2d9734c2ab869f511b71",
+      "size_bytes": 59477412,
+      "voices": [
+        {
+          "name": "冥鳴ひまり",
+          "style": "ノーマル",
+          "style_id": 14
+        }
+      ],
+      "unchanged_weight_sha256": {
+        "models/pd.bin": "743fea2f3abe3c24dd18426af460df50f3a58e2070217d9144eae9dfb35bdb15",
+        "models/pi.bin": "36295eb5b87cb5ac4fc0bc0a6247843f4fa3b1ff86761d5fd1b8d55cf5c93569",
+        "models/d.bin": "9ed4badcebaa0bf1cd570102152dec0612ca726e0ea7dad2e1dbafd09676eb6d"
+      }
+    },
+    {
+      "file": "8.vvm",
+      "model_uuid": "af9c6b39-de94-5e40-8de3-a3e0ab727b00",
+      "source_sha256": "bde9cb507f62277a176cc2c7182db686294028d2adff4d3a49c39dd1498f2fed",
+      "output_sha256": "d2d01d74c84ded36320a3d565939472ff724832133d30b41eee348d1a3a5adf6",
+      "size_bytes": 58210680,
+      "voices": [
+        {
+          "name": "WhiteCUL",
+          "style": "たのしい",
+          "style_id": 24
+        }
+      ],
+      "unchanged_weight_sha256": {
+        "models/pd.bin": "42aff7d6d92900b4b5fa6133cb62c0fde20e7e1e47836a799f50e4450811a2f3",
+        "models/pi.bin": "66820be5ccd494b042b583cd8edc572b11ba0a2e7d6cde37e2540a27037b5c01",
+        "models/d.bin": "7a7353356253f9d01d79710317e6277c4fbea4a92161f7caa62483626fce46d8"
+      }
+    }
+  ]
+}

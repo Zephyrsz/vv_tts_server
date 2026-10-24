@@ -1,0 +1,25 @@
+server:
+  host: "127.0.0.1"
+  port: 8767
+  ssl:
+    cert_file: "certs/localhost.crt"
+    key_file: "certs/localhost.key"
+
+tts_engine:
+  assets_dir: "assets"
+  model_dir: "assets/models"
+  cpu_num_threads: 4
+
+streaming:
+  default_segment_length: 0.3
+  min_segment_length: 0.1
+  max_segment_length: 1.0
+
+limits:
+  max_text_length: 500
+  max_connections: 1000
+
+rate_limit:
+  enabled: true
+  rate: 5
+  burst: 10

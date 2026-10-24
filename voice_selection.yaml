@@ -1,0 +1,21 @@
+# 构建配置：由 rebuild_models.py 读取；运行配置为 config.yaml。
+# 未指定音色的角色已按原始 metas.json 的第一个音色解析。
+models:
+  - source_vvm: "0.vvm"
+    voices:
+      - name: "四国めたん"
+        style: "あまあま"
+        style_id: 0
+      - name: "春日部つむぎ"
+        style: "ノーマル"
+        style_id: 8
+  - source_vvm: "1.vvm"
+    voices:
+      - name: "冥鳴ひまり"
+        style: "ノーマル"
+        style_id: 14
+  - source_vvm: "8.vvm"
+    voices:
+      - name: "WhiteCUL"
+        style: "たのしい"
+        style_id: 24
