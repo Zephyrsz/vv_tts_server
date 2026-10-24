@@ -1,0 +1,825 @@
+{
+  "date_local": "2026-10-24 Asia/Shanghai",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:11:29) [Clang 20.1.8 ]",
+  "cpu": "Apple M5 Max",
+  "ram_bytes": 137438953472,
+  "project_commit": "bebbfffb163882b575a599df4359a68f047f3165",
+  "texts": {
+    "short": "こんにちは。",
+    "medium": "今日はいい天気ですね。図書館で日本語の本を読んでいます。",
+    "long": "朝、窓を開けると、涼しい風が部屋に入ってきました。今日は図書館に行って、日本の歴史について調べる予定です。駅までの道には、小さなパン屋さんや花屋さんが並んでいます。電車に乗っている間も、本を読みながら新しい言葉を覚えています。午後は友達と公園を散歩して、夕方には家に帰ります。"
+  },
+  "models": [
+    {
+      "file": "0.vvm",
+      "bytes": 58213262,
+      "sha256": "0438d777e2021697f8cf5723bb6687e595b83f1b712261b6b8b6a281db3f013c"
+    },
+    {
+      "file": "1.vvm",
+      "bytes": 59477412,
+      "sha256": "886ca9093ba0ba6c960973416ad7d4f56e47ad80193c2d9734c2ab869f511b71"
+    },
+    {
+      "file": "8.vvm",
+      "bytes": 58210680,
+      "sha256": "d2d01d74c84ded36320a3d565939472ff724832133d30b41eee348d1a3a5adf6"
+    }
+  ],
+  "results": [
+    {
+      "threads": 1,
+      "import_ms": 14.205583138391376,
+      "engine_init_ms": 9.384999983012676,
+      "rss_after_init_mib": 57.46875,
+      "supported_devices": "SupportedDevices(cpu=True, cuda=False, dml=False)",
+      "is_gpu_mode": false,
+      "first_calls": [
+        {
+          "style": 0,
+          "elapsed_ms": 3139.2347500659525,
+          "rss_mib": 393.640625,
+          "duration_s": 4.298666666666667,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 206380
+        },
+        {
+          "style": 8,
+          "elapsed_ms": 2722.5032921414822,
+          "rss_mib": 432.34375,
+          "duration_s": 4.181333333333333,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 200748
+        },
+        {
+          "style": 14,
+          "elapsed_ms": 3059.771791100502,
+          "rss_mib": 851.5625,
+          "duration_s": 4.064,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 195116
+        },
+        {
+          "style": 24,
+          "elapsed_ms": 3067.255625035614,
+          "rss_mib": 861.21875,
+          "duration_s": 4.149333333333334,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 199212
+        }
+      ],
+      "warm_cases": [
+        {
+          "label": "short",
+          "style": 0,
+          "characters": 6,
+          "duration_s": 0.9386666666666666,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 45100,
+          "median": {
+            "query_ms": 0.3811251372098923,
+            "synthesis_ms": 928.1514580361545,
+            "total_ms": 928.5325831733644
+          },
+          "rtf": 0.9892037462784422,
+          "runs": [
+            {
+              "query_ms": 0.5584158934652805,
+              "synthesis_ms": 925.424125045538,
+              "total_ms": 925.9825409390032
+            },
+            {
+              "query_ms": 0.3811251372098923,
+              "synthesis_ms": 928.1514580361545,
+              "total_ms": 928.5325831733644
+            },
+            {
+              "query_ms": 0.36283303052186966,
+              "synthesis_ms": 932.2556250263005,
+              "total_ms": 932.6184580568224
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 0,
+          "characters": 28,
+          "duration_s": 4.298666666666667,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 206380,
+          "median": {
+            "query_ms": 0.777082983404398,
+            "synthesis_ms": 2733.8993749581277,
+            "total_ms": 2734.676457941532
+          },
+          "rtf": 0.6361685308486815,
+          "runs": [
+            {
+              "query_ms": 0.76916697435081,
+              "synthesis_ms": 2737.2081249486655,
+              "total_ms": 2737.9772919230163
+            },
+            {
+              "query_ms": 0.777082983404398,
+              "synthesis_ms": 2733.8993749581277,
+              "total_ms": 2734.676457941532
+            },
+            {
+              "query_ms": 0.7836672011762857,
+              "synthesis_ms": 2726.013665786013,
+              "total_ms": 2726.7973329871893
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 8,
+          "characters": 28,
+          "duration_s": 4.181333333333333,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 200748,
+          "median": {
+            "query_ms": 0.7965420372784138,
+            "synthesis_ms": 2670.6567499786615,
+            "total_ms": 2671.45329201594
+          },
+          "rtf": 0.6388998625675878,
+          "runs": [
+            {
+              "query_ms": 0.7755828555673361,
+              "synthesis_ms": 2666.0524590406567,
+              "total_ms": 2666.828041896224
+            },
+            {
+              "query_ms": 0.9227918926626444,
+              "synthesis_ms": 2679.139167070389,
+              "total_ms": 2680.0619589630514
+            },
+            {
+              "query_ms": 0.7965420372784138,
+              "synthesis_ms": 2670.6567499786615,
+              "total_ms": 2671.45329201594
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 14,
+          "characters": 28,
+          "duration_s": 4.064,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 195116,
+          "median": {
+            "query_ms": 0.7763751782476902,
+            "synthesis_ms": 2645.2641668729484,
+            "total_ms": 2646.01712487638
+          },
+          "rtf": 0.6510868909636761,
+          "runs": [
+            {
+              "query_ms": 0.8504579309374094,
+              "synthesis_ms": 2631.0802919324487,
+              "total_ms": 2631.930749863386
+            },
+            {
+              "query_ms": 0.7763751782476902,
+              "synthesis_ms": 2663.1413749419153,
+              "total_ms": 2663.917750120163
+            },
+            {
+              "query_ms": 0.7529580034315586,
+              "synthesis_ms": 2645.2641668729484,
+              "total_ms": 2646.01712487638
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 24,
+          "characters": 28,
+          "duration_s": 4.149333333333334,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 199212,
+          "median": {
+            "query_ms": 0.795499887317419,
+            "synthesis_ms": 2680.837541818619,
+            "total_ms": 2681.586083956063
+          },
+          "rtf": 0.646269139770902,
+          "runs": [
+            {
+              "query_ms": 0.795499887317419,
+              "synthesis_ms": 2681.6859589889646,
+              "total_ms": 2682.481458876282
+            },
+            {
+              "query_ms": 0.7485421374440193,
+              "synthesis_ms": 2680.837541818619,
+              "total_ms": 2681.586083956063
+            },
+            {
+              "query_ms": 0.8336671162396669,
+              "synthesis_ms": 2677.388707874343,
+              "total_ms": 2678.2223749905825
+            }
+          ]
+        },
+        {
+          "label": "long",
+          "style": 0,
+          "characters": 138,
+          "duration_s": 24.608,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 1181228,
+          "median": {
+            "query_ms": 3.163499990478158,
+            "synthesis_ms": 13777.422375045717,
+            "total_ms": 13783.364499919116
+          },
+          "rtf": 0.5601172179746065,
+          "runs": [
+            {
+              "query_ms": 25.495291920378804,
+              "synthesis_ms": 13765.012165997177,
+              "total_ms": 13790.507457917556
+            },
+            {
+              "query_ms": 3.163499990478158,
+              "synthesis_ms": 13780.200999928638,
+              "total_ms": 13783.364499919116
+            },
+            {
+              "query_ms": 2.9059580992907286,
+              "synthesis_ms": 13777.422375045717,
+              "total_ms": 13780.328333145007
+            }
+          ]
+        }
+      ],
+      "encoding": {
+        "base64_ms": 0.1202709972858429,
+        "json_with_base64_ms": 0.3707085270434618,
+        "split_300ms_ms": 0.031229457817971706,
+        "duration_s": 4.298666666666667,
+        "rate": 24000,
+        "channels": 1,
+        "sample_width": 2,
+        "bytes": 206380
+      },
+      "rss_end_mib": 1464.984375,
+      "peak_rss_mib": 1464.984375
+    },
+    {
+      "threads": 2,
+      "import_ms": 12.3906668741256,
+      "engine_init_ms": 8.756041061133146,
+      "rss_after_init_mib": 57.28125,
+      "supported_devices": "SupportedDevices(cpu=True, cuda=False, dml=False)",
+      "is_gpu_mode": false,
+      "first_calls": [
+        {
+          "style": 0,
+          "elapsed_ms": 1831.0735409613699,
+          "rss_mib": 356.828125,
+          "duration_s": 4.298666666666667,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 206380
+        },
+        {
+          "style": 8,
+          "elapsed_ms": 1376.6952089499682,
+          "rss_mib": 410.375,
+          "duration_s": 4.181333333333333,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 200748
+        },
+        {
+          "style": 14,
+          "elapsed_ms": 1778.6874580197036,
+          "rss_mib": 708.28125,
+          "duration_s": 4.064,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 195116
+        },
+        {
+          "style": 24,
+          "elapsed_ms": 1792.5100410357118,
+          "rss_mib": 843.3125,
+          "duration_s": 4.149333333333334,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 199212
+        }
+      ],
+      "warm_cases": [
+        {
+          "label": "short",
+          "style": 0,
+          "characters": 6,
+          "duration_s": 0.9386666666666666,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 45100,
+          "median": {
+            "query_ms": 0.38029090501368046,
+            "synthesis_ms": 481.4806249924004,
+            "total_ms": 481.9907499477267
+          },
+          "rtf": 0.5134844637227203,
+          "runs": [
+            {
+              "query_ms": 0.5101249553263187,
+              "synthesis_ms": 481.4806249924004,
+              "total_ms": 481.9907499477267
+            },
+            {
+              "query_ms": 0.36266702227294445,
+              "synthesis_ms": 479.7183747868985,
+              "total_ms": 480.08104180917144
+            },
+            {
+              "query_ms": 0.38029090501368046,
+              "synthesis_ms": 482.1988749317825,
+              "total_ms": 482.57916583679616
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 0,
+          "characters": 28,
+          "duration_s": 4.298666666666667,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 206380,
+          "median": {
+            "query_ms": 0.8281250484287739,
+            "synthesis_ms": 1416.69987491332,
+            "total_ms": 1417.4786659423262
+          },
+          "rtf": 0.32974844896301014,
+          "runs": [
+            {
+              "query_ms": 0.9417091496288776,
+              "synthesis_ms": 1426.5402078162879,
+              "total_ms": 1427.4819169659168
+            },
+            {
+              "query_ms": 0.7787910290062428,
+              "synthesis_ms": 1416.69987491332,
+              "total_ms": 1417.4786659423262
+            },
+            {
+              "query_ms": 0.8281250484287739,
+              "synthesis_ms": 1411.8655838537961,
+              "total_ms": 1412.693708902225
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 8,
+          "characters": 28,
+          "duration_s": 4.181333333333333,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 200748,
+          "median": {
+            "query_ms": 0.8172499947249889,
+            "synthesis_ms": 1385.1345418952405,
+            "total_ms": 1385.9254999551922
+          },
+          "rtf": 0.3314553969918349,
+          "runs": [
+            {
+              "query_ms": 0.8172499947249889,
+              "synthesis_ms": 1383.4422919899225,
+              "total_ms": 1384.2595419846475
+            },
+            {
+              "query_ms": 1.000083051621914,
+              "synthesis_ms": 1386.1750001087785,
+              "total_ms": 1387.1750831604004
+            },
+            {
+              "query_ms": 0.790958059951663,
+              "synthesis_ms": 1385.1345418952405,
+              "total_ms": 1385.9254999551922
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 14,
+          "characters": 28,
+          "duration_s": 4.064,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 195116,
+          "median": {
+            "query_ms": 0.8253329433500767,
+            "synthesis_ms": 1359.384458977729,
+            "total_ms": 1360.2097919210792
+          },
+          "rtf": 0.33469729131916315,
+          "runs": [
+            {
+              "query_ms": 0.8253329433500767,
+              "synthesis_ms": 1359.384458977729,
+              "total_ms": 1360.2097919210792
+            },
+            {
+              "query_ms": 0.8392089512199163,
+              "synthesis_ms": 1383.6836661212146,
+              "total_ms": 1384.5228750724345
+            },
+            {
+              "query_ms": 0.8195829577744007,
+              "synthesis_ms": 1356.2644999474287,
+              "total_ms": 1357.084082905203
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 24,
+          "characters": 28,
+          "duration_s": 4.149333333333334,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 199212,
+          "median": {
+            "query_ms": 0.8156669791787863,
+            "synthesis_ms": 1380.100459093228,
+            "total_ms": 1380.9411670081317
+          },
+          "rtf": 0.3328103712262528,
+          "runs": [
+            {
+              "query_ms": 0.84070791490376,
+              "synthesis_ms": 1380.100459093228,
+              "total_ms": 1380.9411670081317
+            },
+            {
+              "query_ms": 0.8151670917868614,
+              "synthesis_ms": 1370.6386249978095,
+              "total_ms": 1371.4537920895964
+            },
+            {
+              "query_ms": 0.8156669791787863,
+              "synthesis_ms": 1388.1647910457104,
+              "total_ms": 1388.9804580248892
+            }
+          ]
+        },
+        {
+          "label": "long",
+          "style": 0,
+          "characters": 138,
+          "duration_s": 24.608,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 1181228,
+          "median": {
+            "query_ms": 3.0867501627653837,
+            "synthesis_ms": 7156.198833137751,
+            "total_ms": 7159.411958185956
+          },
+          "rtf": 0.29093839231900015,
+          "runs": [
+            {
+              "query_ms": 3.2131250482052565,
+              "synthesis_ms": 7156.198833137751,
+              "total_ms": 7159.411958185956
+            },
+            {
+              "query_ms": 3.0867501627653837,
+              "synthesis_ms": 7243.437750032172,
+              "total_ms": 7246.524500194937
+            },
+            {
+              "query_ms": 3.0297921039164066,
+              "synthesis_ms": 7142.626208020374,
+              "total_ms": 7145.656000124291
+            }
+          ]
+        }
+      ],
+      "encoding": {
+        "base64_ms": 0.12045796029269695,
+        "json_with_base64_ms": 0.3661664668470621,
+        "split_300ms_ms": 0.03139604814350605,
+        "duration_s": 4.298666666666667,
+        "rate": 24000,
+        "channels": 1,
+        "sample_width": 2,
+        "bytes": 206380
+      },
+      "rss_end_mib": 1450.546875,
+      "peak_rss_mib": 1450.546875
+    },
+    {
+      "threads": 4,
+      "import_ms": 12.471042107790709,
+      "engine_init_ms": 9.012249996885657,
+      "rss_after_init_mib": 57.5,
+      "supported_devices": "SupportedDevices(cpu=True, cuda=False, dml=False)",
+      "is_gpu_mode": false,
+      "first_calls": [
+        {
+          "style": 0,
+          "elapsed_ms": 1239.3352088984102,
+          "rss_mib": 356.875,
+          "duration_s": 4.298666666666667,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 206380
+        },
+        {
+          "style": 8,
+          "elapsed_ms": 798.8437919411808,
+          "rss_mib": 402.046875,
+          "duration_s": 4.181333333333333,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 200748
+        },
+        {
+          "style": 14,
+          "elapsed_ms": 1213.0664167925715,
+          "rss_mib": 705.78125,
+          "duration_s": 4.064,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 195116
+        },
+        {
+          "style": 24,
+          "elapsed_ms": 1208.3365418948233,
+          "rss_mib": 787.90625,
+          "duration_s": 4.149333333333334,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 199212
+        }
+      ],
+      "warm_cases": [
+        {
+          "label": "short",
+          "style": 0,
+          "characters": 6,
+          "duration_s": 0.9386666666666666,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 45100,
+          "median": {
+            "query_ms": 0.4138750955462456,
+            "synthesis_ms": 271.20495797134936,
+            "total_ms": 271.54850005172193
+          },
+          "rtf": 0.28929172590737423,
+          "runs": [
+            {
+              "query_ms": 0.52033388055861,
+              "synthesis_ms": 271.6669160872698,
+              "total_ms": 272.1872499678284
+            },
+            {
+              "query_ms": 0.34354208037257195,
+              "synthesis_ms": 271.20495797134936,
+              "total_ms": 271.54850005172193
+            },
+            {
+              "query_ms": 0.4138750955462456,
+              "synthesis_ms": 269.0299157984555,
+              "total_ms": 269.4437908940017
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 0,
+          "characters": 28,
+          "duration_s": 4.298666666666667,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 206380,
+          "median": {
+            "query_ms": 0.8451251778751612,
+            "synthesis_ms": 797.3581249825656,
+            "total_ms": 798.2699999120086
+          },
+          "rtf": 0.185701767969605,
+          "runs": [
+            {
+              "query_ms": 0.9118749294430017,
+              "synthesis_ms": 797.3581249825656,
+              "total_ms": 798.2699999120086
+            },
+            {
+              "query_ms": 0.8451251778751612,
+              "synthesis_ms": 811.785832978785,
+              "total_ms": 812.6309581566602
+            },
+            {
+              "query_ms": 0.8164159953594208,
+              "synthesis_ms": 791.058000177145,
+              "total_ms": 791.8744161725044
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 8,
+          "characters": 28,
+          "duration_s": 4.181333333333333,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 200748,
+          "median": {
+            "query_ms": 0.8932081982493401,
+            "synthesis_ms": 787.6844168640673,
+            "total_ms": 788.5776250623167
+          },
+          "rtf": 0.1885947764020209,
+          "runs": [
+            {
+              "query_ms": 0.7772080134600401,
+              "synthesis_ms": 799.1543330717832,
+              "total_ms": 799.9315410852432
+            },
+            {
+              "query_ms": 1.0039589833468199,
+              "synthesis_ms": 778.2945830840617,
+              "total_ms": 779.2985420674086
+            },
+            {
+              "query_ms": 0.8932081982493401,
+              "synthesis_ms": 787.6844168640673,
+              "total_ms": 788.5776250623167
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 14,
+          "characters": 28,
+          "duration_s": 4.064,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 195116,
+          "median": {
+            "query_ms": 0.8777498733252287,
+            "synthesis_ms": 777.0009161904454,
+            "total_ms": 777.9920829925686
+          },
+          "rtf": 0.19143505979147848,
+          "runs": [
+            {
+              "query_ms": 0.8777498733252287,
+              "synthesis_ms": 773.6573750153184,
+              "total_ms": 774.5351248886436
+            },
+            {
+              "query_ms": 0.8701251354068518,
+              "synthesis_ms": 799.8167090117931,
+              "total_ms": 800.6868341472
+            },
+            {
+              "query_ms": 0.991166802123189,
+              "synthesis_ms": 777.0009161904454,
+              "total_ms": 777.9920829925686
+            }
+          ]
+        },
+        {
+          "label": "medium",
+          "style": 24,
+          "characters": 28,
+          "duration_s": 4.149333333333334,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 199212,
+          "median": {
+            "query_ms": 0.8907080627977848,
+            "synthesis_ms": 778.04791694507,
+            "total_ms": 778.9386250078678
+          },
+          "rtf": 0.18772621103981388,
+          "runs": [
+            {
+              "query_ms": 0.8907080627977848,
+              "synthesis_ms": 778.04791694507,
+              "total_ms": 778.9386250078678
+            },
+            {
+              "query_ms": 0.9137089364230633,
+              "synthesis_ms": 777.9390409123152,
+              "total_ms": 778.8527498487383
+            },
+            {
+              "query_ms": 0.8691248949617147,
+              "synthesis_ms": 778.172500198707,
+              "total_ms": 779.0416250936687
+            }
+          ]
+        },
+        {
+          "label": "long",
+          "style": 0,
+          "characters": 138,
+          "duration_s": 24.608,
+          "rate": 24000,
+          "channels": 1,
+          "sample_width": 2,
+          "bytes": 1181228,
+          "median": {
+            "query_ms": 3.08674992993474,
+            "synthesis_ms": 4378.474166151136,
+            "total_ms": 4381.560916081071
+          },
+          "rtf": 0.1780543285143478,
+          "runs": [
+            {
+              "query_ms": 3.4159591887146235,
+              "synthesis_ms": 4362.120790872723,
+              "total_ms": 4365.5367500614375
+            },
+            {
+              "query_ms": 3.08674992993474,
+              "synthesis_ms": 4378.474166151136,
+              "total_ms": 4381.560916081071
+            },
+            {
+              "query_ms": 3.0432080384343863,
+              "synthesis_ms": 4448.073459090665,
+              "total_ms": 4451.116667129099
+            }
+          ]
+        }
+      ],
+      "encoding": {
+        "base64_ms": 0.13525004032999277,
+        "json_with_base64_ms": 0.414603971876204,
+        "split_300ms_ms": 0.0337500823661685,
+        "duration_s": 4.298666666666667,
+        "rate": 24000,
+        "channels": 1,
+        "sample_width": 2,
+        "bytes": 206380
+      },
+      "rss_end_mib": 1372.4375,
+      "peak_rss_mib": 1372.4375
+    }
+  ],
+  "limitations": [
+    "3 warm repetitions only; no p95 or speedup claim",
+    "process first call, warm filesystem cache",
+    "macOS CPU only; no iPhone, ANE, energy, or playback measurement",
+    "RSS includes Python, three loaded model sessions, dictionary and runtime; not iOS budget",
+    "query includes Open JTalk plus duration/intonation; synthesis includes more than decoder alone"
+  ]
+}

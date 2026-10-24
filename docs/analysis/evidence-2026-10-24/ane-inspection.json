@@ -1,0 +1,138 @@
+{
+  "date_local": "2026-10-24 Asia/Shanghai",
+  "scope": "Static source and official documentation analysis; no model conversion or iPhone/ANE measurements",
+  "project_commit": "bebbfffb163882b575a599df4359a68f047f3165",
+  "core_version": "0.17.0",
+  "ort_coreml_reference_version": "1.23.2",
+  "product_minimum_ios": "17.0",
+  "confirmed_contract": {
+    "operation": "Talk Decode",
+    "inputs": {
+      "f0": "float32[N,1]",
+      "phoneme": "float32[N,45]",
+      "speaker_id": "int64[1], internal voice ID"
+    },
+    "output": "float32 wave, 24 kHz",
+    "samples_per_frame": 256,
+    "padding_frames_per_side": 38,
+    "padding_f0": 0,
+    "padding_phoneme": "channel 0 = 1; other channels = 0"
+  },
+  "confirmed_constraints": [
+    "Before iOS 18, multiple-input Core ML models may use EnumeratedShapes for only one input; remaining inputs must be fixed.",
+    "In iOS 18+, multiple enumerated inputs must have matching shape counts and are paired by index.",
+    "Core 0.17.0 runtime tensor handling accepts float32 and int64, and rejects float16 and int32 at its input/output boundaries.",
+    "ORT 1.23.2 Core ML cache metadata key is COREML_CACHE_KEY; fallback hashing for in-memory models is not weight-content unique.",
+    "Core 0.17.0 loads model bytes into ORT from memory.",
+    "MLComputePlan and reshapeFrequency are documented as introduced in iOS 17.4.",
+    "ORT 1.23.2 optimization hints configuration does not expose reshapeFrequency."
+  ],
+  "not_verified": [
+    "Availability of a dedicated vv_bin-compatible runtime with Core ML EP enabled",
+    "Full protected model graph, actual precision, and actual ANE operator coverage",
+    "Equivalence of shape padding, graph rewrites, FP16, or quantized candidates",
+    "iPhone build, device latency, footprint, thermal behavior, energy, and actual ANE execution"
+  ],
+  "sources": [
+    {
+      "file": "ort-coreml-provider.cc",
+      "url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.23.2/onnxruntime/core/providers/coreml/coreml_execution_provider.cc",
+      "bytes": 13369,
+      "sha256": "ac109cdbdf7efbbe2063411fed12fe32678a8602d52d540fdd7babe6aed4d34a"
+    },
+    {
+      "file": "ort-coreml-header.h",
+      "url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.23.2/include/onnxruntime/core/providers/coreml/coreml_provider_factory.h",
+      "bytes": 5247,
+      "sha256": "d6430c47d2b076d4a40ba6523e78d75cc4c4b0e5604fb280168891331b057ade"
+    },
+    {
+      "file": "core-devices.rs",
+      "url": "https://raw.githubusercontent.com/VOICEVOX/voicevox_core/0.17.0/crates/voicevox_core/src/core/devices.rs",
+      "bytes": 7500,
+      "sha256": "38535590199c0f09635f579c58b59862f84bdb228bdd26a5517ce31a8713d901"
+    },
+    {
+      "file": "core-infer.rs",
+      "url": "https://raw.githubusercontent.com/VOICEVOX/voicevox_core/0.17.0/crates/voicevox_core/src/core/infer.rs",
+      "bytes": 8726,
+      "sha256": "9b530e12f9941d29910f32aae403dc3219c78fe33d2920c0e971b775186a0da5"
+    },
+    {
+      "file": "core-status.rs",
+      "url": "https://raw.githubusercontent.com/VOICEVOX/voicevox_core/0.17.0/crates/voicevox_core/src/core/status.rs",
+      "bytes": 27057,
+      "sha256": "6cb032d9a182231b4ab5d1800ef215ac8aec62c310ad7106189414ec7d8af1e6"
+    },
+    {
+      "file": "ort-coreml-options.cc",
+      "url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.23.2/onnxruntime/core/providers/coreml/coreml_options.cc",
+      "bytes": 4763,
+      "sha256": "0abbb76d3f8621b113420c243633b186701da66903bae9a6377bb22ef86d49fb"
+    },
+    {
+      "file": "core-acoustic.rs",
+      "url": "https://raw.githubusercontent.com/VOICEVOX/voicevox_core/0.17.0/crates/voicevox_core/src/engine/acoustic_feature_extractor.rs",
+      "bytes": 15434,
+      "sha256": "6124b268ac83b299009f8ee23f16050c28b3947342cdf3ecae7596d1923c8c45"
+    },
+    {
+      "file": "apple-reshapehint.json",
+      "url": "https://developer.apple.com/tutorials/data/documentation/coreml/mloptimizationhints-swift.struct/reshapefrequency-swift.property.json",
+      "bytes": 6468,
+      "sha256": "8d4d6aa9957cfa7eacdbc2d5a22978e3794b9f38712b7d4c1d13cfb3e8534141"
+    },
+    {
+      "file": "apple-mlcomputeplan-symbol.json",
+      "url": "https://developer.apple.com/tutorials/data/documentation/coreml/mlcomputeplan-1w21n.json",
+      "bytes": 18757,
+      "sha256": "ef2f0361aa8135bd5243e47447af0eb60564fe2b0b78c3242bc067df39393227"
+    },
+    {
+      "file": "ort-coreml-model.mm",
+      "url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.23.2/onnxruntime/core/providers/coreml/model/model.mm",
+      "bytes": 30745,
+      "sha256": "2cbd84036b477bffa0403ec9594ca044e1f40e10b91c0a48c5b890eed8fb4e2e"
+    },
+    {
+      "file": "core-adjust-pre.rs",
+      "url": "https://raw.githubusercontent.com/VOICEVOX/voicevox_core/0.17.0/crates/voicevox_core/src/core/adjust/pre.rs",
+      "bytes": 1938,
+      "sha256": "c63eff83760d6bac655dda62bb92d3ca14a50791a6fe9c30161a7e57e0c12d79"
+    },
+    {
+      "file": "ort-coreml-convtranspose.cc",
+      "url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.23.2/onnxruntime/core/providers/coreml/builders/impl/convtranspose_op_builder.cc",
+      "bytes": 9788,
+      "sha256": "425748be7434efcd8c984943399b97c9956ca204ee4ce8200c4babff0934c021"
+    },
+    {
+      "file": "core/crates/voicevox_core/src/core/infer/domains/talk.rs",
+      "url": "https://raw.githubusercontent.com/VOICEVOX/voicevox_core/0.17.0/crates/voicevox_core/src/core/infer/domains/talk.rs",
+      "bytes": 2624,
+      "sha256": "21accb2cf597b81428ced00f6a08f71203fd538a88711892b920894ce7c57d29",
+      "representation": "source"
+    },
+    {
+      "file": "core/crates/voicevox_core/src/synthesizer.rs",
+      "url": "https://raw.githubusercontent.com/VOICEVOX/voicevox_core/0.17.0/crates/voicevox_core/src/synthesizer.rs",
+      "bytes": 155000,
+      "sha256": "51802e33bd8e8bbf536b79fdf5722b0596977b95e35ba29481db48219d15d36e",
+      "representation": "source"
+    },
+    {
+      "file": "core/crates/voicevox_core/src/core/infer/runtimes/onnxruntime.rs",
+      "url": "https://raw.githubusercontent.com/VOICEVOX/voicevox_core/0.17.0/crates/voicevox_core/src/core/infer/runtimes/onnxruntime.rs",
+      "bytes": 39388,
+      "sha256": "c1d0f0d5c9dd766f7405c56914eb34d5164ffd050de69bdc258dcd74b552ea22",
+      "representation": "source"
+    },
+    {
+      "file": "coreml_dynamic_plain.txt",
+      "url": "https://apple.github.io/coremltools/docs-guides/source/flexible-inputs.html",
+      "bytes": 15153,
+      "sha256": "0528795109ab71436fe8446fc261a199d6a65c5ac0b14f6f78f0ce7683b1e781",
+      "representation": "extracted text"
+    }
+  ]
+}

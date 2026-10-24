@@ -1,0 +1,61 @@
+2026-10-24 08:53:20,707 - voicevox_core.synthesizer - INFO - CPUを利用します
+test_all_four_voices_synthesize_valid_wav (test_four_voices.FourVoicesTest.test_all_four_voices_synthesize_valid_wav) ... ok
+test_lists_exactly_requested_four_voices (test_four_voices.FourVoicesTest.test_lists_exactly_requested_four_voices) ... ok
+test_unselected_voices_are_rejected (test_four_voices.FourVoicesTest.test_unselected_voices_are_rejected) ... ok
+test_wss_lists_only_four_and_rejects_unselected_synthesis (test_four_voices.FourVoicesTest.test_wss_lists_only_four_and_rejects_unselected_synthesis) ... 2026-10-24 08:53:23,575 - asyncio - WARNING - Executing <Task pending name='Task-14' coro=<FourVoicesTest.test_wss_lists_only_four_and_rejects_unselected_synthesis() running at /Users/rgwei/pj/pj_my/vv_tts_server/tests/test_four_voices.py:60> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at /Users/rgwei/anaconda3/lib/python3.13/asyncio/tasks.py:765> cb=[_run_until_complete_cb() at /Users/rgwei/anaconda3/lib/python3.13/asyncio/base_events.py:181] created at /Users/rgwei/anaconda3/lib/python3.13/asyncio/runners.py:100> took 0.584 seconds
+2026-10-24 08:53:23,576 - asyncio - INFO - <Server sockets=(<asyncio.TransportSocket fd=6, family=2, type=1, proto=6, laddr=('127.0.0.1', 57064)>,)> is serving
+2026-10-24 08:53:23,576 - websockets.server - INFO - server listening on 127.0.0.1:57064
+2026-10-24 08:53:23,601 - websockets.server - INFO - connection open
+2026-10-24 08:53:23,602 - server - INFO - 客户端 ('127.0.0.1', 57065) (ID: 4940543184) 已连接,当前连接数: 1
+2026-10-24 08:53:23,603 - server - INFO - 成功返回说话人列表
+2026-10-24 08:53:23,606 - server - ERROR - 合成失败: Unknown speaker style ID: 23
+Traceback (most recent call last):
+  File "/Users/rgwei/pj/pj_my/vv_tts_server/server.py", line 202, in handle_synthesis
+    wav_data = await asyncio.to_thread(self.tts_engine.synthesize, text, speaker, params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rgwei/anaconda3/lib/python3.13/asyncio/threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rgwei/anaconda3/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/rgwei/pj/pj_my/vv_tts_server/local_engine.py", line 56, in synthesize
+    raise ValueError(f"Unknown speaker style ID: {style_id}")
+ValueError: Unknown speaker style ID: 23
+2026-10-24 08:53:23,607 - server - WARNING - 发送错误: Synthesis failed: Unknown speaker style ID: 23
+2026-10-24 08:53:23,608 - server - ERROR - 流式合成失败: Unknown speaker style ID: 23
+Traceback (most recent call last):
+  File "/Users/rgwei/pj/pj_my/vv_tts_server/server.py", line 249, in handle_stream_synthesis
+    wav_data = await asyncio.to_thread(self.tts_engine.synthesize, text, speaker, params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rgwei/anaconda3/lib/python3.13/asyncio/threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/rgwei/anaconda3/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/rgwei/pj/pj_my/vv_tts_server/local_engine.py", line 56, in synthesize
+    raise ValueError(f"Unknown speaker style ID: {style_id}")
+ValueError: Unknown speaker style ID: 23
+2026-10-24 08:53:23,608 - server - WARNING - 发送错误: Streaming synthesis failed: Unknown speaker style ID: 23
+2026-10-24 08:53:23,892 - asyncio - WARNING - Executing <Task pending name='Task-17' coro=<serve.<locals>.protocol_handler() running at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:762> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /Users/rgwei/anaconda3/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /Users/rgwei/anaconda3/lib/python3.13/asyncio/base_events.py:459> created at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:226> took 0.283 seconds
+2026-10-24 08:53:23,894 - server - INFO - 合成完成: 5 字符, 45100 bytes, 283ms, speaker 0
+2026-10-24 08:53:24,153 - asyncio - WARNING - Executing <Task pending name='Task-17' coro=<serve.<locals>.protocol_handler() running at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:762> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /Users/rgwei/anaconda3/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /Users/rgwei/anaconda3/lib/python3.13/asyncio/base_events.py:459> created at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:226> took 0.258 seconds
+2026-10-24 08:53:24,155 - server - INFO - 合成完成: 5 字符, 45100 bytes, 258ms, speaker 8
+2026-10-24 08:53:24,407 - asyncio - WARNING - Executing <Task pending name='Task-17' coro=<serve.<locals>.protocol_handler() running at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:762> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /Users/rgwei/anaconda3/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /Users/rgwei/anaconda3/lib/python3.13/asyncio/base_events.py:459> created at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:226> took 0.251 seconds
+2026-10-24 08:53:24,408 - server - INFO - 合成完成: 5 字符, 43052 bytes, 251ms, speaker 14
+2026-10-24 08:53:24,664 - asyncio - WARNING - Executing <Task pending name='Task-17' coro=<serve.<locals>.protocol_handler() running at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:762> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /Users/rgwei/anaconda3/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /Users/rgwei/anaconda3/lib/python3.13/asyncio/base_events.py:459> created at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:226> took 0.255 seconds
+2026-10-24 08:53:24,666 - server - INFO - 合成完成: 5 字符, 43564 bytes, 255ms, speaker 24
+2026-10-24 08:53:24,919 - asyncio - WARNING - Executing <Task pending name='Task-17' coro=<serve.<locals>.protocol_handler() running at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:762> wait_for=<Future pending cb=[_chain_future.<locals>._call_check_cancel() at /Users/rgwei/anaconda3/lib/python3.13/asyncio/futures.py:384, Task.task_wakeup()] created at /Users/rgwei/anaconda3/lib/python3.13/asyncio/base_events.py:459> created at /tmp/vv_tts_analysis_20261024_venv/lib/python3.13/site-packages/websockets/asyncio/server.py:226> took 0.252 seconds
+2026-10-24 08:53:24,921 - server - INFO - 流式合成完成: 5 字符, 5 块, 43740 bytes, 253ms, speaker 24
+2026-10-24 08:53:24,925 - websockets.server - INFO - connection closed
+2026-10-24 08:53:24,926 - server - INFO - 客户端 ('127.0.0.1', 57065) 已移除,当前连接数: 0
+2026-10-24 08:53:24,926 - websockets.server - INFO - server closing
+2026-10-24 08:53:24,926 - websockets.server - INFO - server closed
+ok
+test_rebuild_cannot_overwrite_source_models (test_four_voices.ModelRebuildTest.test_rebuild_cannot_overwrite_source_models) ... ok
+test_rebuild_validates_selection_before_writing (test_four_voices.ModelRebuildTest.test_rebuild_validates_selection_before_writing) ... ok
+test_rebuilt_archives_keep_only_selected_core_metadata (test_four_voices.ModelRebuildTest.test_rebuilt_archives_keep_only_selected_core_metadata) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 5.013s
+
+OK

@@ -1,0 +1,60 @@
+{
+  "date_local": "2026-10-24 Asia/Shanghai",
+  "scope": "Analysis only; runtime source and shipped assets were not modified",
+  "project_commit": "bebbfffb163882b575a599df4359a68f047f3165",
+  "core_release": {
+    "url": "https://github.com/VOICEVOX/voicevox_core/releases/tag/0.17.0",
+    "tag": "0.17.0",
+    "published_at": "2026-08-13T20:17:15Z"
+  },
+  "ort_release": {
+    "url": "https://github.com/VOICEVOX/onnxruntime-builder/releases/tag/voicevox_onnxruntime-1.23.2",
+    "tag": "voicevox_onnxruntime-1.23.2",
+    "published_at": "2026-07-23T07:18:15Z"
+  },
+  "downloaded_artifacts": [
+    {
+      "name": "core_xcframework.zip",
+      "bytes": 5834062,
+      "sha256": "e634b0fd7e09924a4c9c4f6e8b5c0da0790a7649d89f289cbcad1b97976212be"
+    },
+    {
+      "name": "voicevox_onnxruntime-ios-xcframework-1.23.2.zip",
+      "bytes": 17280214,
+      "sha256": "c9c33b2653125441d6a2475194ed7971a908687c0d99d8944337b0ca85ea646d"
+    },
+    {
+      "name": "voicevox_onnxruntime-osx-arm64-1.23.2.tgz",
+      "bytes": 5697683,
+      "sha256": "010bdb42fefb4ca73429c0d8d3df2cb20a3b6ca0affebac3c05dc450b9fe338d"
+    }
+  ],
+  "ios_inspection": {
+    "core_slices": [
+      "ios-arm64",
+      "ios-arm64_x86_64-simulator",
+      "macos-arm64_x86_64"
+    ],
+    "core_ios_runtime_dependency": "@rpath/voicevox_onnxruntime.framework/voicevox_onnxruntime",
+    "core_header": "VOICEVOX_LINK_ONNXRUNTIME; voicevox_onnxruntime_init_once",
+    "ort_slices": [
+      "ios-arm64",
+      "ios-arm64_x86_64-simulator"
+    ],
+    "ort_minimum_ios": "16.0",
+    "ort_direct_coreml_dependency_seen": false,
+    "limitations": "Binary/package inspection only. No iOS app build, device execution, or ANE trace."
+  },
+  "test_results": {
+    "python_unittest": {
+      "passed": 7,
+      "elapsed_s": 5.013
+    },
+    "node_playback": {
+      "passed": 6
+    }
+  },
+  "tool_limitations": [
+    "xcrun xctrace unavailable in active developer tools; no iPhone device measurement"
+  ]
+}
