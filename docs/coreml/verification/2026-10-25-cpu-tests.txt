@@ -1,0 +1,28 @@
+Branch: feature/cpu-baseline
+Commit: d704b51
+Python command: /tmp/vv-tts-git-baseline-20261024/bin/python -m unittest discover -s tests -p test_*.py
+Python log final excerpt (full log: /tmp/cpu-branch-vv-python-tests.log):
+2026-10-25 20:49:26,423 - websockets.server - INFO - server closed
+....
+----------------------------------------------------------------------
+Ran 7 tests in 4.278s
+
+OK
+
+Node command: node --test tests/test_playback.cjs
+✔ received PCM fragments are all scheduled before previous onended, with no gap (9.405458ms)
+✔ WAV containers are removed and original signed PCM is preserved exactly (0.60525ms)
+✔ unsupported context rate combines PCM and resamples a single buffer (0.338458ms)
+✔ new requests stop old nodes and discard late frames and complete responses (0.540083ms)
+✔ stream_end does not report playback complete until scheduled nodes end (0.291167ms)
+✔ truncated WAV produces a playback error instead of scheduling corrupt audio (0.318709ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 40.244
+
+The Python asyncio debug log contains slow-task warnings during synthesis; these tests passing do not imply zero warnings. No runtime source was modified by the branch split.
